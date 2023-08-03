@@ -21,6 +21,7 @@ headers = {
 }
 
 
+
 def spam(message, target):
     data = {
     'username': str(target),
@@ -29,6 +30,7 @@ def spam(message, target):
     'gameSlug': '',
     'referrer': 'https://l.instagram.com/'
 }
+    spam_n = 0
 
     while True:
 
@@ -38,7 +40,10 @@ def spam(message, target):
             headers=headers
         )
 
-        print(f"Gotcha rest in peace {r.status_code}")
+        if r.status_code == 200:
+            spam_n+=1
+
+        print(f"Gotcha rest in peace {r.status_code} -- {spam_n}" )
 
         if r.status_code == 429:
             print(f'Hmmm, rate limit, wait 20 seconds')
